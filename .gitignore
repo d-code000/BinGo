@@ -1,5 +1,7 @@
 **/*.zip
 **/*.log
+assets
+resources
 /katago/source
 /.idea
 /ui/migration
