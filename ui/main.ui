@@ -6,29 +6,37 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>596</height>
+    <width>839</width>
+    <height>589</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>20</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>BinGo</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QGraphicsView" name="graphicsView"/>
-    </item>
-   </layout>
+   <layout class="QVBoxLayout" name="verticalLayout"/>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>839</width>
      <height>33</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Свойства</string>
+    </property>
+    <addaction name="action"/>
+   </widget>
+   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QDockWidget" name="dockWidget">
@@ -43,6 +51,12 @@
    </attribute>
    <widget class="QWidget" name="dockWidgetContents">
     <layout class="QVBoxLayout" name="verticalLayout_2">
+     <property name="spacing">
+      <number>20</number>
+     </property>
+     <property name="bottomMargin">
+      <number>9</number>
+     </property>
      <item>
       <widget class="QLabel" name="difficultImageLable">
        <property name="sizePolicy">
@@ -53,7 +67,7 @@
        </property>
        <property name="minimumSize">
         <size>
-         <width>0</width>
+         <width>200</width>
          <height>200</height>
         </size>
        </property>
@@ -81,23 +95,14 @@
        <property name="alignment">
         <set>Qt::AlignmentFlag::AlignCenter</set>
        </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
       </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="difficultHorizontalLayout">
-       <item>
-        <widget class="QLabel" name="difficultLable">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>СЛОЖНОСТЬ</string>
-         </property>
-        </widget>
-       </item>
-       <item>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="2">
         <widget class="QComboBox" name="difficultComboBox">
          <property name="font">
           <font>
@@ -137,8 +142,111 @@
          </item>
         </widget>
        </item>
-       <item>
+       <item row="1" column="2">
+        <widget class="QDoubleSpinBox" name="doubleSpinBox">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="decimals">
+          <number>1</number>
+         </property>
+         <property name="minimum">
+          <double>-150.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>150.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="stepType">
+          <enum>QAbstractSpinBox::StepType::DefaultStepType</enum>
+         </property>
+         <property name="value">
+          <double>6.500000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLabel" name="label_2">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Правила</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Коми</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="difficultLable">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сложность</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QComboBox" name="comboBox">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>ЯПОНСКИЕ</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>КИТАЙСКИЕ</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>КОРЕЙСКИЕ</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>TROMP-TAYLOR</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>AGA</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="0" column="0">
         <widget class="QLabel" name="levelUpImageLable">
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>30</height>
+          </size>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -159,9 +267,26 @@
        </property>
       </spacer>
      </item>
+     <item>
+      <widget class="QPushButton" name="startPushButton">
+       <property name="font">
+        <font>
+         <pointsize>26</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Отправиться в Ад</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
   </widget>
+  <action name="action">
+   <property name="text">
+    <string>О системе</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
