@@ -10,10 +10,10 @@ if __name__ == '__main__':
     
     window = MainWindow()
 
-    font_id = QFontDatabase.addApplicationFont("resources/EternalUiBold-Rpj0A.ttf")
+    font_id = QFontDatabase.addApplicationFont("resources/EternalUiRegular-BWZGd.ttf")
     font_family = QFontDatabase.applicationFontFamilies(font_id)[0]
-    custom_font = QFont(font_family, 12)
-    window.setFont(custom_font)
+    custom_font = QFont(font_family)
+    app.setFont(custom_font)
     
     window.show()
     
