@@ -66,5 +66,5 @@ katago/source/katago.exe benchmark -model katago/source/models/kata1-b28c512nbt-
 # Build exe
 
 ```powershell
-pyinstaller --add-data "assets;assets" --add-data "katago;katago" --add-data "resources;resources" --icon "assets/BinGoXDoomEternal.ico" --name bingo --windowed main.py
+pyinstaller --add-data "assets;assets" --add-data "katago;katago" --add-data "resources;resources" --icon "assets/BinGoXDoomEternal.ico" --name bingo --windowed --onefile main.py
 ```
