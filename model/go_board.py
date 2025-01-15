@@ -1,3 +1,4 @@
+import string
 
 
 class GoBoard:
@@ -19,6 +20,15 @@ class GoBoard:
         if self.board[y][x] != 0:
             return False
         self.board[y][x] = self.current_color
+        self.history.append(["W" if self.current_color == 2 else "B", f"{string.ascii_uppercase[x]}{self.size - y}"])
         self.current_color = 1 if self.current_color == 2 else 2
         return True
+    
+    def clear(self):
+        """
+        Clear the board.
+        """
+        self.board = [[0 for _ in range(self.size)] for _ in range(self.size)]
+        self.history = []
+        self.current_color = 1
         

@@ -1,7 +1,9 @@
 **/*.zip
 **/*.log
-assets
 resources
+!resources/img/difficult/
+!resources/img/background/volcano_art_wallhaven.jpg
+!resources/img/stone/
 /katago/source
 /.idea
 /ui/migration

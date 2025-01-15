@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>839</width>
-    <height>589</height>
+    <height>612</height>
    </rect>
   </property>
   <property name="font">
@@ -43,7 +43,7 @@
    <property name="minimumSize">
     <size>
      <width>400</width>
-     <height>492</height>
+     <height>538</height>
     </size>
    </property>
    <property name="maximumSize">
@@ -114,94 +114,16 @@
      </item>
      <item>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="2">
-        <widget class="QComboBox" name="difficultComboBox">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="iconSize">
+       <item row="0" column="0">
+        <widget class="QLabel" name="levelUpImageLable">
+         <property name="minimumSize">
           <size>
-           <width>40</width>
-           <height>40</height>
+           <width>30</width>
+           <height>30</height>
           </size>
          </property>
-         <item>
-          <property name="text">
-           <string>МНЕ РАНО УМИРАТЬ</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>СДЕЛАЙ МНЕ БОЛЬНО</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>УЛЬТРА-ЖЕСТОКОСТЬ</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>КОШМАР</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>АБСОЛЮТНЫЙ КОШМАР</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QDoubleSpinBox" name="doubleSpinBox">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="decimals">
-          <number>1</number>
-         </property>
-         <property name="minimum">
-          <double>-150.000000000000000</double>
-         </property>
-         <property name="maximum">
-          <double>150.000000000000000</double>
-         </property>
-         <property name="singleStep">
-          <double>1.000000000000000</double>
-         </property>
-         <property name="stepType">
-          <enum>QAbstractSpinBox::StepType::DefaultStepType</enum>
-         </property>
-         <property name="value">
-          <double>6.500000000000000</double>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLabel" name="label_2">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
          <property name="text">
-          <string>Правила</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLabel" name="label">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Коми</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -251,16 +173,118 @@
          </item>
         </widget>
        </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="levelUpImageLable">
-         <property name="minimumSize">
-          <size>
-           <width>30</width>
-           <height>30</height>
-          </size>
+       <item row="2" column="1">
+        <widget class="QLabel" name="rulesLabel">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
          </property>
          <property name="text">
-          <string/>
+          <string>Правила</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QComboBox" name="difficultComboBox">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>МНЕ РАНО УМИРАТЬ</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>СДЕЛАЙ МНЕ БОЛЬНО</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>УЛЬТРА-ЖЕСТОКОСТЬ</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>КОШМАР</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>АБСОЛЮТНЫЙ КОШМАР</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QDoubleSpinBox" name="komiSpinBox">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="decimals">
+          <number>1</number>
+         </property>
+         <property name="minimum">
+          <double>-150.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>150.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="stepType">
+          <enum>QAbstractSpinBox::StepType::DefaultStepType</enum>
+         </property>
+         <property name="value">
+          <double>6.500000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="komiLabel">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Коми</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QCheckBox" name="AICheckBox">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>KataGo</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLabel" name="AILabel">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>ИИ</string>
          </property>
         </widget>
        </item>

@@ -1,18 +1,21 @@
 import string
+import time
 
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap, QPen
 from PySide6.QtWidgets import QGraphicsView
 
 from model.go_board import GoBoard
+from katago.engine import KataGoEngine
 
 
 class GraphicsView(QGraphicsView):
-    def __init__(self, scene, go_board: GoBoard, background: QPixmap, parent=None):
+    def __init__(self, scene, go_board: GoBoard, engine: KataGoEngine, background: QPixmap, parent=None):
         super().__init__(scene, parent)
         
         self.background = background
         self.go_board = go_board
+        self.engine = engine
         self.board_y = None
         self.board_x = None
         self.board_step = None
@@ -28,27 +31,21 @@ class GraphicsView(QGraphicsView):
         painter.setPen(pen)
 
         # background size
-        max_background_size = min(rect.width(), rect.height()) - 20
-        x_background = -max_background_size // 2
-        y_background = -max_background_size // 2 + 10
+        max_border_size = min(rect.width(), rect.height()) - 20
+        x_border = -max_border_size // 2
+        y_border = -max_border_size // 2 + 10
 
         # board size
         indent = 50
-        max_board_size = max_background_size - indent
-        self.board_x = x_background + indent
-        self.board_y = y_background + indent
+        max_board_size = max_border_size - indent
+        self.board_x = x_border + indent
+        self.board_y = y_border + indent
         self.board_step = max_board_size / (self.go_board.size + 1)
 
-
-        cropped_background = self.background.copy(
-            (self.background.width() - rect.width()) / 2,
-            max_board_size + 10,
-            rect.width(),
-            rect.width()
-        )
-
-        painter.drawPixmap(-rect.width() / 2, y_background - 10, cropped_background)
-        painter.drawRect(x_background, y_background, max_background_size, max_background_size)
+        painter.drawPixmap(-rect.width() / 2,
+                           y_border - 10, 
+                           self.crop_and_resize_pixmap(self.background, rect.width(), rect.height()))
+        painter.drawRect(x_border, y_border, max_border_size, max_border_size)
 
         for i in range(1, self.go_board.size + 1):
             painter.drawLine(self.board_x + i * self.board_step, self.board_y + 10, self.board_x + i * self.board_step, self.board_y + max_board_size - 10)
@@ -92,6 +89,34 @@ class GraphicsView(QGraphicsView):
             y = y if y >= 0 else 0
             self.go_board.add_motion(x, y)
             self.viewport().update()
-        
+            time.sleep(1)
+            
+            move = self.engine.next_move(self.go_board.history)
+            move_x= ord(move[0]) - ord('A')
+            move_y = self.go_board.size - int(move[1])
+            self.go_board.add_motion(move_x, move_y)
+            self.viewport().update()
+
+    def crop_and_resize_pixmap(self, pixmap: QPixmap, width: int, height: int) -> QPixmap:
+        original_width = pixmap.width()
+        original_height = pixmap.height()
+    
+        target_ratio = width / height
+    
+        if original_width / original_height > target_ratio:
+            new_width = int(original_height * target_ratio)
+            new_height = original_height
+            x_offset = (original_width - new_width) // 2
+            y_offset = 0
+        else:
+            new_width = original_width
+            new_height = int(original_width / target_ratio)
+            x_offset = 0
+            y_offset = (original_height - new_height) // 2
+    
+        cropped_pixmap = pixmap.copy(x_offset, y_offset, new_width, new_height)
+        resized_pixmap = cropped_pixmap.scaled(width, height)
+    
+        return resized_pixmap
         
         
