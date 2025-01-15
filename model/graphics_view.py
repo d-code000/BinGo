@@ -38,6 +38,7 @@ class GraphicsView(QGraphicsView):
         self.board_x = x_border + indent
         self.board_y = y_border + indent
         self.board_step = max_board_size / (self.go_board.size + 1)
+        self.board_step = self.board_step if self.board_step >= 1 else 1
 
         painter.drawPixmap(-rect.width() / 2,
                            -rect.height() / 2,
@@ -93,6 +94,7 @@ class GraphicsView(QGraphicsView):
         original_width = pixmap.width()
         original_height = pixmap.height()
     
+        height = height if height > 0 else 1
         target_ratio = width / height
     
         if original_width / original_height > target_ratio:

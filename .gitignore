@@ -7,3 +7,6 @@ resources
 /katago/source
 /.idea
 /ui/migration
+*/**.spec
+build
+dist

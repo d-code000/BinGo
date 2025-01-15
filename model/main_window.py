@@ -44,7 +44,7 @@ class MainWindow(QMainWindow):
         self.ui.startPushButton.clicked.connect(self.start_game)
         
         self.change_difficult(0)
-        self.showMaximized()
+        self.maximumSize()
         
     def change_difficult(self, state):
         self.ui.difficultImageLable.setPixmap(

@@ -62,3 +62,9 @@ curl.exe --output-dir katago/source/models/ -L -O "https://github.com/lightvecto
 ```powershell
 katago/source/katago.exe benchmark -model katago/source/models/kata1-b28c512nbt-s7944987392-d4526094999.bin.gz
 ```
+
+# Build exe
+
+```powershell
+pyinstaller --add-data "assets;assets" --add-data "katago;katago" --add-data "resources;resources" --icon "assets/BinGoXDoomEternal.ico" --name bingo --windowed main.py
+```
