@@ -10,3 +10,5 @@ resources
 **/*.spec
 build
 dist
+gtp_logs
+analysis_logs

@@ -8,19 +8,25 @@ class GoBoard:
     Class to represent a Go board.
     self.board: 0 - empty, 1 - black, 2 - white
     """
-    def __init__(self, size: int = 19, komi: float = 6.5, start_engine: bool = False):
+    def __init__(self, size: int = 19, komi: float = 6.5, start_engine: bool = False, strong: int = 5):
         self.size = size
         self.komi = komi
         self.board = [[0 for _ in range(size)] for _ in range(size)]
         self.history = []
         self.current_color = 1
         self.engine = None
+        if strong < 1:
+            strong = 1
+        elif strong > 20:
+            strong = 20
+        self.strong = strong
         
         if start_engine:
             self.engine = KataGoEngine(
                 katago_path="katago/source/katago.exe",
                 config_path="katago/source/analysis_example.cfg",
                 model_path="katago/source/models/kata1-b28c512nbt-s7944987392-d4526094999.bin.gz",
+                human_model_path="katago/source/models/b18c384nbt-humanv0.bin.gz",
                 size=self.size
             )
             self.engine.start()
@@ -43,7 +49,7 @@ class GoBoard:
         Get the next move from the AI.
         """
         if self.engine is not None:
-            move = self.engine.next_move(self.history)
+            move = self.engine.next_move(self.history, self.komi, f"rank_{self.strong}k")
             move_x= ord(move[0]) - ord('A')
             move_y = self.size - int(move[1])
             self.add_move(move_x, move_y)

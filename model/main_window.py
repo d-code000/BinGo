@@ -2,7 +2,6 @@ from PySide6.QtCore import Qt, QSize
 from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtWidgets import QMainWindow, QGraphicsScene
 
-from katago.engine import KataGoEngine
 from model.go_board import GoBoard
 from model.graphics_view import GraphicsView
 from ui.migration.main import Ui_MainWindow
@@ -55,9 +54,14 @@ class MainWindow(QMainWindow):
         )
     
     def start_game(self):
+        def map_value(value, old_min, old_max, new_min, new_max) -> int:
+            return round(new_min + (value - old_min) * (new_max - new_min) / (old_max - old_min))
         komi = self.ui.komiSpinBox.value()
         start_engine = self.ui.AICheckBox.isChecked()
-        self.graphicsView.go_board = GoBoard(9, komi, start_engine)
+        strong = map_value(self.ui.difficultComboBox.currentIndex(), 
+                           0, self.ui.difficultComboBox.count(), 
+                           1, 20)
+        self.graphicsView.go_board = GoBoard(9, komi, start_engine, strong)
         self.graphicsView.viewport().update()
     
     def closeEvent(self, event):
