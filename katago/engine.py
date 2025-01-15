@@ -57,3 +57,6 @@ class KataGoEngine:
     
     def stop(self, *args):
         self.engine_process.stdin.close()
+    
+    def __del__(self):
+        self.stop()

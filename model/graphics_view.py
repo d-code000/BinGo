@@ -1,21 +1,18 @@
 import string
-import time
 
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap, QPen
 from PySide6.QtWidgets import QGraphicsView
 
 from model.go_board import GoBoard
-from katago.engine import KataGoEngine
 
 
 class GraphicsView(QGraphicsView):
-    def __init__(self, scene, go_board: GoBoard, engine: KataGoEngine, background: QPixmap, parent=None):
+    def __init__(self, scene, go_board: GoBoard, background: QPixmap, parent=None):
         super().__init__(scene, parent)
         
         self.background = background
         self.go_board = go_board
-        self.engine = engine
         self.board_y = None
         self.board_x = None
         self.board_step = None
@@ -43,8 +40,8 @@ class GraphicsView(QGraphicsView):
         self.board_step = max_board_size / (self.go_board.size + 1)
 
         painter.drawPixmap(-rect.width() / 2,
-                           y_border - 10, 
-                           self.crop_and_resize_pixmap(self.background, rect.width(), rect.height()))
+                           -rect.height() / 2,
+                           self.__crop_and_resize_pixmap(self.background, rect.width(), rect.height()))
         painter.drawRect(x_border, y_border, max_border_size, max_border_size)
 
         for i in range(1, self.go_board.size + 1):
@@ -87,17 +84,12 @@ class GraphicsView(QGraphicsView):
             y = round((position.y() - self.board_y) / self.board_step - 1)
             x = x if x >= 0 else 0
             y = y if y >= 0 else 0
-            self.go_board.add_motion(x, y)
-            self.viewport().update()
-            time.sleep(1)
-            
-            move = self.engine.next_move(self.go_board.history)
-            move_x= ord(move[0]) - ord('A')
-            move_y = self.go_board.size - int(move[1])
-            self.go_board.add_motion(move_x, move_y)
+            self.go_board.add_move(x, y)
+            self.go_board.next_move()
             self.viewport().update()
 
-    def crop_and_resize_pixmap(self, pixmap: QPixmap, width: int, height: int) -> QPixmap:
+    @staticmethod
+    def __crop_and_resize_pixmap(pixmap: QPixmap, width: int, height: int) -> QPixmap:
         original_width = pixmap.width()
         original_height = pixmap.height()
     
